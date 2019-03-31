@@ -1,0 +1,34 @@
+:root {
+    --btn-primary-bg-color: #B61D2A;
+    --btn-seconday-bg-color: gray;
+
+     --btn-primary-text-color: #gray;
+     --btn-secondary-text-color: #B61D2A;
+   
+     
+  }
+ 
+
+
+.teer-btn-primary{
+    background-color:var(--btn-primary-bg-color);
+    color:white;
+    font-size: 12px;
+}
+.teer-btn-secondary{  
+ color:var(--btn-primary-bg-color);
+}
+.teer-text i{
+    width: 40px;
+    color:white;
+    line-height: 30px;
+    text-align: center
+ }
+.teer-page{
+    
+}
+
+.teer-options-search:hover{
+    background-color:var(--btn-primary-bg-color);
+    color:white;
+}
