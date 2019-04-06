@@ -52,12 +52,12 @@ class GraphBuilder extends React.Component {
                this.props.dataItems.map((parentNode,index)=>{
 
                 return [
-                   <div>
+                   <div key ={"one"}>
                        <div style={{marginTop:40}}></div>
                      {
                         parentNode.partners.map((childNodes,i)=>{                      
                         childNodes.teeridclass = "teer-child-nodes"
-                        return <div key={index}>{this.CreateChildElement(childNodes)} </div>
+                        return <div key={"node-"+index}>{this.CreateChildElement(childNodes)} </div>
                         })
                      }
                    </div>,
