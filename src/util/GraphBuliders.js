@@ -34,41 +34,45 @@ class GraphBuilder extends React.Component {
 
   ConnectElements() {
     var paths = []
-    this.props.dataItems.map(current => {
-      current.partners.map((partner) => {
-        paths.push({ start: "#node-" + partner.id, end: "#node-" + current.id, stroke: "yellow" });
+
+    var _currentPerson  =   this.props.dataItem;
+ 
+
+    (_currentPerson.partners|| []).map((partner) => {
+  
+        paths.push({ start: "#node-" + partner.id, end: "#node-" + _currentPerson.id, stroke: "yellow" });
       })
-    });
+ 
     return paths;
   }
   TopHangingTree() {
 
+    var parentNode =    this.props.dataItem;
    return <div style={{ position: "relative", float: "right" }}>   
 
     <div id="divId" className="svgContainer"></div>
 
    <div className="teer-flex-row outer nodeWrapper">
              {
-               this.props.dataItems.map((parentNode,index)=>{
-
-                return [
+           
+                 [
                    <div key ={"one"}>
                        <div style={{marginTop:40}}></div>
                      {
-                        parentNode.partners.map((childNodes,i)=>{                      
+                       ( parentNode.partners|| []).map((childNodes,i)=>{                      
                         childNodes.teeridclass = "teer-child-nodes"
-                        return <div key={"node-"+index}>{this.CreateChildElement(childNodes)} </div>
+                        return <div key={"node-"+i}>{this.CreateChildElement(childNodes)} </div>
                         })
                      }
                    </div>,
                     <div style={{ width: 50 }}></div>,
                    
                    <div>
-                      <div key={index}>{this.CreateChildElement(parentNode)}</div>
+                      <div key={"three"}>{this.CreateChildElement(parentNode)}</div>
                   </div>
                 ]
 
-               })
+            
              }
           </div>
           </div>

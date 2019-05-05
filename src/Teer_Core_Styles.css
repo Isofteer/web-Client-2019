@@ -21,6 +21,8 @@ body{
    font-weight: 700;
    font-size: 16px
 }
+
+
 .teer-page{
     border-left-style: solid;
     border-left-color: teal;
@@ -99,6 +101,9 @@ font-size: 20px;
 }
 .Appbar{
    background-color: white;
+   min-height: 40px;
+
+  
 }
 
 .teer-round-img{
@@ -523,19 +528,19 @@ transition: background-color .5s;
    flex: 1
 }
 .register-items .register-item{
-margin-top:10px
+margin-top:30px
 }
 .register-item{
-   border-style: solid;
-   border-width: .5px;
-   border-color: rgba(0,0,0,0);
-   border-radius: 8px;
-   overflow: hidden;
+   border-bottom-style: solid;
+   border-width: 1px;
+   border-color: rgba(0,0,0,.7);
+  position: relative;
+ flex:1;
    background-color: white;
    height: 40px;
+   display: flex;
    text-align: left;
-   -webkit-box-shadow: 0 5px 12px rgba(0,0,0,.175);
-   box-shadow: 0 5px 12px rgba(0,0,0,.175);
+  
 }
 .register-item input[type='text'],.register-item select{
    border-style: none;
@@ -543,17 +548,134 @@ margin-top:10px
   padding: 3px 4px;
   outline: none;;
   height: 100%;
+  font-size: 12px;
+  align-self:flex-start;
+  font-weight: 700;
+  flex:3
 
 }
 .register-item select{
     width: 80%;
 }
 
-.register-item i{
-    margin-left: 6px;
+.register-item i{  
     color:green;
+    margin-left: auto;
+    font-size:17px
 
 }
 .register-items .actions{
     margin-top:10px
+}
+
+.register-items  .sub-item{
+ position: relative;
+ margin-left: 4px;
+ flex:1;
+ display: flex;
+ align-items: center
+}
+.teer-field-label{
+   position: absolute;
+   color:rgb(167, 167, 167);
+   top:-5px;
+   font-weight: 1000;
+   left:0
+}
+.teer-Outline {
+    -webkit-box-shadow: 0 5px 12px rgba(0,0,0,.175);
+   box-shadow: 0 5px 12px rgba(0,0,0,.175);
+}
+
+.teer-drop-box {
+display: flex;
+flex-flow: row wrap;
+}
+
+
+/* dashboard    styles  */
+
+.teer-isofteer-logo{
+   margin: 5px 7px 1px;  
+}
+
+.teer-isofteer-logo img{
+   height:45px;
+   width:45px;   
+}
+
+.teer-left-section{
+   background-color: #E9E9EF;
+   width:200px;
+}
+
+.teer-profiler-header{
+   
+   min-height: 200px;
+}
+.teer-header-dp{
+   
+   width:100px;
+   height:100px;
+   overflow: hidden;
+   display: flex;
+   border-radius: 50px;
+   align-items: center;
+   justify-content: center
+}
+
+.teer-header-dp img{
+   height: 100px;
+   width:100px
+}
+.teer-notification-module{
+   align-self: stretch;  
+   margin: 10px 0 15px;
+   display: flex;
+   justify-content:space-around
+}
+.teer-profItem{  
+   font-size:25px;
+  width:40px;
+  height:40px;
+  border-radius:20px;
+  background-color:#D7D7D7;
+  font-weight:bolder;
+  display:flex;
+  justify-content:center;
+  align-items:center
+
+}
+.teer-profileMenuItem{
+   margin:2px 15px 10px;
+   font-size:11px;
+   font-weight:bolder;
+   color:gray;
+   transition:background-color .5s;
+   padding:5px 0 5px !important;
+   display:flex;
+  align-items:center;
+}
+.teer-profileMenuItem path{
+   stroke-width:7px
+
+}
+
+.teer-profileMenuItem .menu-icon{
+   font-weight:800;
+   background-color:#D7D7D7;
+   width:25px;
+   height:25px;
+    transition:background-color .5s;
+   display:flex;
+   justify-content:center;
+   align-items:center;
+   border-radius:15px;
+}
+.teer-profileMenuItem:hover{
+   background-color:#D7D7D7;
+}
+.teer-barLeft-section{
+   margin-left: auto;
+  
 }

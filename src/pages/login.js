@@ -15,8 +15,12 @@ class Login extends Component {
 
         axios.post('http://localhost:5000/login', this.state)
             .then(response => {
-                if (response.data[0])
-                    this.props.parentHandleLogin(Object.assign(response.data[0],{PageType:1}));
+                if (response.data[0]){
+
+                   let ifkUserId  =response.data[0].ipkmemberid;         
+
+                    this.props.parentHandleLogin(Object.assign(response.data[0],{PageType:1,ifkUserId}));
+                }
                     else{
                         this.props.parentHandleLogin({PageType:9})
                     }

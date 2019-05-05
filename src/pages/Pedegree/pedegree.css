@@ -1,0 +1,32 @@
+.teer-paneWondowConatainer{
+    display: flex;
+    flex-flow: column;
+   align-items: center;
+   justify-content: center;
+   flex: 1;
+}
+.teer-paneWondowConatainer li{
+    align-self: stretch;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.teer-pedegree-pane{    
+    min-height: 100px;
+   
+}
+
+.teer-member-circle{
+    height: 90px;
+    width:90px;
+    border-radius:50%;
+    overflow: hidden;
+}
+.teer-member-circle img{
+    height: 90px;
+    width:90px;
+
+}
+.teer-section-content{
+    
+}

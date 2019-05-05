@@ -3,9 +3,14 @@ import Parent from  './Components/Parents'
 
 class Relative extends Component {
 
-    state = {
-        selectedType: "parent",
+    constructor(props){
+        super(props);
+        console.log(props);
+        this.state = {
+            selectedType: "parent",
+        }
     }
+  
 
     handleSelectedTypeChanged = e => {
         this.setState({ selectedType: e.target.value });
@@ -27,7 +32,7 @@ class Relative extends Component {
 
                 <div>
                     {
-                        this.state.selectedType === "parent" ? <Parent /> : null
+                        this.state.selectedType === "parent" ? <Parent  ifkUserId = {this.props.ifkUserId}/> : null
                     }
                 </div>
 
