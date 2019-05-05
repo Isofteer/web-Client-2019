@@ -5,11 +5,15 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
     "@fortawesome/free-solid-svg-icons": "^5.7.2",
+    "@iconify/react": "^1.0.7",
     "axios": "^0.18.0",
     "jquery": "^3.3.1",
     "lodash": "^4.17.11",
+    "moment": "^2.24.0",
     "react": "^16.8.4",
+    "react-connect-elements": "^0.1.1",
     "react-dom": "^16.8.4",
+    "react-flatpickr": "^3.7.1",
     "react-scripts": "2.1.8"
   },
   "scripts": {

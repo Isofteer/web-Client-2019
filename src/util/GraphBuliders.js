@@ -1,103 +1,104 @@
 import React from 'react';
-import Connect from '../lib/js/Connect'
-import $ from 'jquery'
+import $ from 'jquery';
+
+import Connect from '../lib/js/Connector'
+
 class GraphBuilder extends React.Component {
 
   constructor(props) {
     super(props);
-     // initialize Jquery
-     Connect($, window, document);
+    // initialize Jquery
+   
     this.childNode = [];
-    this.svgPaths = [];
     this.state = {
-      value: ''
+    
+      refreshGraph:false
     }
+
   }
-  componentDidMount = () => {
-     window.addEventListener('resize', this.resize);
-    
-      this.CreateConnections( this.childNode);
-    
+  componentDidMount = () => {    
+   
+  }
+  componentWillUnmount() {   
+  }
+  componentDidUpdate(prevProps, prevState) {
+    var paths = this.ConnectElements();
+     new Connect({paths}).Plugin();
   }
 
-  UpfacingTree() {  //useful for graph facing Upwards
-    
-  }
-  CreateConnections(){
 
-    var ParentNode =  this.childNode.length?this.childNode.pop():{};
+  componentWillReceiveProps(props) {
+ 
+
+  }
+
+  ConnectElements() {
+    var paths = []
+
+    var _currentPerson  =   this.props.dataItem;
+ 
+
+    (_currentPerson.partners|| []).map((partner) => {
   
-    window.Interval = window.setTimeout(()=>{
-     
-      
-      var paths =   this.childNode.map((node, index) => {    
-     
-        return {
-          start:"#"+ParentNode.id , end: "#"+node.id , strokeWidth: 1
-       }
-      
-        
-    })
-    
-    $(".svgContainer").HTMLSVGconnect({
-      stroke: "#000",
-      strokeWidth: 8,
-      orientation: "vertical",
-      paths
-    });
+        paths.push({ start: "#node-" + partner.id, end: "#node-" + _currentPerson.id, stroke: "yellow" });
+      })
+ 
+    return paths;
+  }
+  TopHangingTree() {
 
-      // end of code 
-    }
-    ,500);
- }
+    var parentNode =    this.props.dataItem;
+   return <div style={{ position: "relative", float: "right" }}>   
 
+    <div id="divId" className="svgContainer"></div>
 
-  TopHangingTree(headerNode) {
+   <div className="teer-flex-row outer nodeWrapper">
+             {
+           
+                 [
+                   <div key ={"one"}>
+                       <div style={{marginTop:40}}></div>
+                     {
+                       ( parentNode.partners|| []).map((childNodes,i)=>{                      
+                        childNodes.teeridclass = "teer-child-nodes"
+                        return <div key={"node-"+i}>{this.CreateChildElement(childNodes)} </div>
+                        })
+                     }
+                   </div>,
+                    <div style={{ width: 50 }}></div>,
+                   
+                   <div>
+                      <div key={"three"}>{this.CreateChildElement(parentNode)}</div>
+                  </div>
+                ]
 
-    return <div style ={{position:"relative",float:"right"}}>
-      <div ref= {(e=> this.Container =e )} className="svgContainer">       
-      </div>
+            
+             }
+          </div>
+          </div>
 
-      <div className="teer-flex-row outer">
-        <div>
-          <div style={{ marginTop: 100 }}></div>
-          {
-            this.props.people.map((node, index) => {
-              node.src = 'https://res.cloudinary.com/dpssp9evo/image/upload/v1551639719/members/gnxcn3izti9vq0ykonyc.jpg';
-              node.teeridclass = "teer-child-nodes"
-              return this.CreateChildElement(node)
-
-            })
-          }
-        </div>
-        <div style={{ width:70 }}></div>
-        <div> {this.CreateChildElement(headerNode)}</div>
-
-      </div>
-     
-    </div>
-
+ 
   }
   CreateChildElement(args) {
     return (
-      <div className={"teer-flex-row "+args.teeridclass}>
-       <div className="teer-node-names">
-          Serena Wllimans
-          </div>
-        <div ref={e => this.childNode.push(e)} id={"node" + args.id} className={"teer-round-img teer-flex-row teer-flex-center "} >
-          <img src={args.src} alt="" srcSet="" />
-        </div>       
+      <div className={"teer-flex-row " + args.teeridclass}>
+        <div className="teer-node-names">
+          {args.firstname}
+        </div>
+        <div  id={"node-" + args.id} className={"teer-round-img teer-flex-row teer-flex-center "} >
+          <img src={args.img} alt="" srcSet="" />
+        </div>
       </div>
     )
   }
 
 
   render() {
-    var  parent = { parentType:1 ,id: 12, teeridclass: "teer-parent-node ", src: 'https://res.cloudinary.com/dpssp9evo/image/upload/v1551640119/members/yql4q4qf5ptgfg1auwm6.jpg' }
+
     return (
       <div >
         {
-          this.props.registerType === "parent" ? this.TopHangingTree(parent) : null
+          this.props.registerType === "parent"? this.TopHangingTree() : null
         }
       </div>
     )
