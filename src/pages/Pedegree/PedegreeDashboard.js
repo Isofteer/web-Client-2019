@@ -20,7 +20,7 @@ class PedegreeDashboard extends Component {
 
     handleGetUsersPedegree = _User => {
 
-        axios.post('http://localhost:5000/relative/loadPedegree', { memberid: 16 })
+        axios.post('http://localhost:5000/relative/loadPedegree', { memberid: 19 })
             .then((response, error) => {
 
                 console.log(response);
@@ -154,7 +154,7 @@ class PedegreeDashboard extends Component {
     }
     componentDidUpdate() {   
         setTimeout(() => {
-            new Connect({ paths: this.paths, orientation: "auto" }).Plugin();
+            new Connect({ paths: this.paths, orientation: "horizontal" }).Plugin();
         }, 1000);
 
         console.log(this.paths)
