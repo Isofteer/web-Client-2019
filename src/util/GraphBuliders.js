@@ -47,6 +47,7 @@ class GraphBuilder extends React.Component {
   }
   TopHangingTree() {
 
+    
     var parentNode =    this.props.dataItem;
    return <div style={{ position: "relative", float: "right" }}>   
 

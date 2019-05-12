@@ -21,6 +21,7 @@
     width:90px;
     border-radius:50%;
     overflow: hidden;
+    margin:2px 20px
 }
 .teer-member-circle img{
     height: 90px;
@@ -29,4 +30,27 @@
 }
 .teer-section-content{
     
+}
+.ghost-element{
+
+     visibility: hidden;  
+}
+
+.teer-female {
+  
+     background-color: palevioletred
+}
+.teer-male {
+ 
+ background-color: rgba((blue), blue, blue, .6)
+
+}
+
+.teer-user-details{
+    position: absolute;
+    top: 2px;
+    background-color: rgb(226, 226, 226);
+    
+    z-index: 10000;
+    text-align: center;
 }
