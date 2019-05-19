@@ -17,7 +17,7 @@ class App extends Component {
     super();
     this.state = {
       loggedIn: false,
-      PageType: 1,
+      PageType: 0,
       ifkUserId: null
     }
 
@@ -30,13 +30,16 @@ class App extends Component {
       localStorage.setItem("ifkUserId", ifkUserId);
     }
    
+    this.handleLogOut = ()=>{
+      this.setState({PageType: 0})
+    }
   }
 
   componentDidMount(){
-    // if (localStorage.getItem("ifkUserId")) {
-    //   this.setState({ PageType: 1 });
+    if (localStorage.getItem("ifkUserId")) {
+      this.setState({ PageType: 1 });
 
-    // }
+    }
   }
   render() {
    
@@ -44,8 +47,8 @@ class App extends Component {
       <div className="App">
 
 
-        {this.state.PageType === 0 ? <Login ifkUserId={this.state.ifkUserId} parentHandleLogin={this.handleLogin.bind(this)} /> : null}
-        {this.state.PageType === 1 ? <Dashboard ifkUserId={this.state.ifkUserId} /> : null}
+        {this.state.PageType === 0 ? <Login  ifkUserId={this.state.ifkUserId} parentHandleLogin={this.handleLogin.bind(this)} /> : null}
+        {this.state.PageType === 1 ? <Dashboard logout = {this.handleLogOut} ifkUserId={this.state.ifkUserId} /> : null}
         {this.state.PageType === 2 ? <Register ifkUserId={this.state.ifkUserId} parentHandleRegister={this.handleLogin.bind(this)} /> : null}
 
 

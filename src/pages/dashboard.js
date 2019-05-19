@@ -3,8 +3,10 @@ import Appbar from './bars/AppBar'
 import Relative from './popup/Relative'
 import DashboardProfileHeader  from './dashboard/DashboardProfileHeader'
 import DashboardMenu from './dashboard/dashboardMenu'
+import Register from './register'
+import './dashboard.css'
 
-import Pedegree from './Pedegree/PedegreeDashboard'
+import Pedegree from './Pedegree/PedegreeChart'
 
 
 class Dashboard extends Component {
@@ -13,18 +15,19 @@ class Dashboard extends Component {
         super(props);
        
         this.state = {
-            openPage:1
+            openPage:"pedegree"
         }
-        this.handleInvokedAction =value=>{
+        this.handleInvokedAction =args=>{
           
-            this.setState({openPage:1});
+            this.setState({openPage:args.pageName});
         }
     }
 
-handleRelativesPage = (e)=>{
+handleRelativesPage = ( args )=>{
        this.setState({VRP:true})
     }
   
+
 
 render (){
     return ( 
@@ -34,16 +37,17 @@ render (){
                   <DashboardProfileHeader/>
                 </div>
                 <div>
-                    <DashboardMenu command = {this.handleInvokedAction}/>        
+                    <DashboardMenu command = {this.handleInvokedAction.bind(this)}/>        
                 </div>
             </section>
             <section className ='right-section'>
-             <Appbar/>
+             <Appbar logout = {this.props.logout} command = {this.handleInvokedAction.bind(this)} />
 
                 {
                     [
-                        this.state.openPage ===1?  <Pedegree/>:null,
-                        this.state.openPage ===2? <Relative ifkUserId = {this.props.ifkUserId}/>:null
+                        this.state.openPage ==="pedegree"?  <Pedegree/>:null,
+                        this.state.openPage ==="relative"? <Relative ifkUserId = {this.props.ifkUserId}/>:null,
+                        this.state.openPage ==="register"? <div className = "teer-dashboard-reg"> {<Register ifkUserId = {this.props.ifkUserId}/>}</div>:null
                     ]                   
                     
                 }

@@ -10,14 +10,14 @@ class DashboardMenu extends  Component{
         return (
             <div>
                 <ul className="dashboard-actions">
-                                        <li onClick ={e=>this.props.command(e)} className = "teer-profileMenuItem">                                        
+                                        <li onClick ={e=>this.props.command({pageName:"relative"})} className = "teer-profileMenuItem">                                        
                                             <span className ="menu-icon">
                                                <Icon color ={"brown"} icon={userFollow} />
                                             </span>
                                             &nbsp;
-                                            <span> Add Member </span>
+                                            <span> Add Relative </span>
                                         </li>
-                                        <li onClick ={e=>this.props.command(e)} className = "teer-profileMenuItem">                                           
+                                        <li onClick ={e=>this.props.command({pageName:"pedegree"})} className = "teer-profileMenuItem">                                           
                                         <span className ="menu-icon">
                                                <Icon color ={"brown"} icon={userFollow} />
                                             </span>

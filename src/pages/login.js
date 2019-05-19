@@ -11,6 +11,13 @@ class Login extends Component {
             username: ""
         }
     }
+
+componentDidMount(){
+    setTimeout(
+        localStorage.removeItem("ifkUserId")
+        ,60000 * 2)
+}
+
     handleLogin(args) {
 
         axios.post('http://localhost:5000/login', this.state)
