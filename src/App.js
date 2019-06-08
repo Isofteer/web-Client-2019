@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Dashboard from './pages/dashboard';
 import Login from './pages/login'
 import Register from "./pages/register";
+
+
 import 'flatpickr/dist/themes/light.css'
 import './lib/fa/css/all.min.css'
 import './App.css';
@@ -17,7 +19,7 @@ class App extends Component {
     super();
     this.state = {
       loggedIn: false,
-      PageType: 0,
+      PageType: 4,
       ifkUserId: null
     }
 
@@ -37,7 +39,7 @@ class App extends Component {
 
   componentDidMount(){
     if (localStorage.getItem("ifkUserId")) {
-      this.setState({ PageType: 1 });
+      this.setState({ PageType:  1});
 
     }
   }
@@ -50,7 +52,8 @@ class App extends Component {
         {this.state.PageType === 0 ? <Login  ifkUserId={this.state.ifkUserId} parentHandleLogin={this.handleLogin.bind(this)} /> : null}
         {this.state.PageType === 1 ? <Dashboard logout = {this.handleLogOut} ifkUserId={this.state.ifkUserId} /> : null}
         {this.state.PageType === 2 ? <Register ifkUserId={this.state.ifkUserId} parentHandleRegister={this.handleLogin.bind(this)} /> : null}
-
+        
+      
 
 
       </div>

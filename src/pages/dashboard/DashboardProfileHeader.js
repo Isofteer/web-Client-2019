@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { Icon, InlineIcon } from "@iconify/react";
 import peopleIcon from '@iconify/react/simple-line-icons/people';
-import speechIcon from '@iconify/react/simple-line-icons/speech';
 import bubblesIcon from '@iconify/react/simple-line-icons/bubbles';
-
 import bubbleIcon from '@iconify/react/simple-line-icons/bubble';
-
 
 class DashboardProfileHeader  extends React.Component{
 
@@ -37,7 +34,8 @@ class DashboardProfileHeader  extends React.Component{
                                </div>
                             </div>
 
-
+                            
+                           
                  </div>
             </div>
         )

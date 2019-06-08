@@ -6,6 +6,12 @@ import DashboardMenu from './dashboard/dashboardMenu'
 import Register from './register'
 import './dashboard.css'
 
+
+
+import   './Components/css.css'
+import Family from './Components/Family'
+
+
 import Pedegree from './Pedegree/PedegreeChart'
 
 
@@ -15,11 +21,11 @@ class Dashboard extends Component {
         super(props);
        
         this.state = {
-            openPage:"pedegree"
+            openPage:"family",
+            subPage:""
         }
-        this.handleInvokedAction =args=>{
-          
-            this.setState({openPage:args.pageName});
+        this.handleInvokedAction =args=>{       
+            this.setState({openPage:args.pageName,subPage:args.subPage});
         }
     }
 
@@ -43,14 +49,16 @@ render (){
             <section className ='right-section'>
              <Appbar logout = {this.props.logout} command = {this.handleInvokedAction.bind(this)} />
 
-                {
-                    [
-                        this.state.openPage ==="pedegree"?  <Pedegree/>:null,
-                        this.state.openPage ==="relative"? <Relative ifkUserId = {this.props.ifkUserId}/>:null,
-                        this.state.openPage ==="register"? <div className = "teer-dashboard-reg"> {<Register ifkUserId = {this.props.ifkUserId}/>}</div>:null
-                    ]                   
+                
                     
-                }
+                        {this.state.openPage ==="pedegree"?  <Pedegree/>:null}
+                        {this.state.openPage ==="relative"? <Relative ifkUserId = {this.props.ifkUserId}/>:null}
+                        {this.state.openPage ==="register"? <div className = "teer-dashboard-reg"> {<Register ifkUserId = {this.props.ifkUserId}/>}</div>:null}
+                        {this.state.openPage ==="family"? <Family  page ={ this.state.subPage } ifkUserId = {this.props.ifkUserId}/>:null}
+                      
+                              
+                    
+                
 
                  
                

@@ -1,0 +1,253 @@
+.teer-family-wrapper{   
+    height: 100%;
+    
+}
+.teer-main-header{
+    font-size: 50px;
+}
+
+.teer-foundmembersWrapper {
+    overflow: auto;   
+    list-style: none;
+    overflow: auto;
+    padding: 0;
+}
+
+.teer-foundmembersWrapper li{
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color:rgba(226, 226, 226,.3);
+    overflow: hidden;
+    height: auto;
+    transform: scaleY(1);    
+    transform-origin: top;
+    transition: transform 0.26s ease;
+   
+}
+
+.teer-details-wrapper .fancy section{
+    display: flex;
+    justify-content: flex-start;
+
+}
+
+.teer-details-wrapper{
+    width:100%;
+    display: flex;
+   align-items: center;   
+    padding:7px;
+   
+    cursor:pointer;
+}
+.teer-details-wrapper > div{
+    margin-right:5px;
+    font-weight: 600;
+
+}
+
+.teer-memberItem-more{     
+   padding:7px;   
+
+}
+
+.teer-show{
+    display:block !important;
+}
+
+.teer-hide{
+    display:none !important;
+}
+
+.teer-partners{
+ display: flex;
+ justify-content: space-around
+
+}
+
+
+.teer-s-image{
+    height:60px;
+    width:60px;
+    border-radius:50%;
+    overflow:hidden;
+
+}
+
+.teer-s-image img{
+    width:60px;
+}
+
+.teer-popup{
+    display: none;
+}
+
+.teer-popup.family{
+    display: unset;
+}
+
+
+.teer-menu-popup{
+    position: absolute;
+    right:-50px;
+    top:0;
+    box-shadow: -1px 1px 7px 0px rgba(0,0,0,.2);
+    z-index: 1000;;
+    background-color: white;
+    border-radius: 5px;
+    min-height: 100px;
+    display: flex   ;
+ 
+}
+
+
+.teer-menu-popup .family{
+
+}
+
+.teer-family-wrapper, .add-parent-pop{
+    overflow: auto
+}
+
+
+.teer-menu-popup h4{ 
+padding:3px 7px;
+margin:0;
+color: var(--btn-primary-bg-color);
+}
+.teer-menu-popup ul{ 
+padding: 0;
+display: flex;
+flex-flow: column;
+justify-content: space-evenly;
+align-self: stretch;
+}
+
+
+.teer-menu-popup ul >li{ 
+     display: flex;
+     align-items: center;
+     justify-content: flex-start;
+     align-self: stretch;
+     margin:0;
+     padding:3px 7px !important;
+    }
+    .teer-menu-popup ul >li> span { 
+      margin-right:7px;
+       }
+
+
+        .speech-bubble {
+        position: relative;      
+        border-radius: .4em;
+        }
+    
+    .speech-bubble:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: -6px;
+        width: 0;
+        height: 0;
+        border: 6px solid transparent;
+        border-right-color:var(--btn-primary-bg-color);
+        border-left: 0;
+        margin-top: -6px;
+        margin-left: -6px;
+    }
+
+
+.add-parent-pop
+{
+    margin-top: 1px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    background-color: white;
+    min-height: 400px;
+    padding :2px 7px;
+    flex:1;
+    min-width: 200px
+}
+
+.add-parent-pop:hover
+{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+    
+
+
+.add-parent-pop h5{
+    font-size:14px;
+    margin:0 0 10px 0;
+    padding: 0;
+}
+
+
+.teer-s-dp {
+    height:60px;
+    width:60px;
+    border-radius:50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: gray
+
+}
+
+
+.teer-s-dp  img {    
+    width:90px;   
+}
+
+.teer-partner-item{
+    position: relative;
+}
+
+.teer-inc{
+     position: absolute;
+     bottom: 0px;
+     left:-25px
+    
+}
+.menu-icon.teer-parent{
+   
+    box-shadow:0 6px 12px rgba(0,0,0,.175);
+    border-radius: 50%;
+    width:22px;
+    height:22px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+   
+}
+
+.menu-icon.teer-parent:hover{
+    background-color: white;
+}
+
+.teer-member-action{
+    margin-left: auto;
+    -webkit-justify-content: end;
+    justify-content: start;
+    align-self: flex-start;
+    padding: 1px 8px
+}
+
+
+.teer-member-action span{
+
+    height: 25px;
+    font-size: 12px;
+    width:25px
+}
+
+@media only screen and (max-width: 600px) {
+
+    .teer-foundmembersWrapper{
+
+    }
+    
+  }

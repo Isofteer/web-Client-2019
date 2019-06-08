@@ -607,6 +607,7 @@ flex-flow: row wrap;
 .teer-left-section{
    background-color: #E9E9EF;
    width:200px;
+   min-width: 200px;
 }
 
 .teer-profiler-header{
@@ -655,6 +656,7 @@ flex-flow: row wrap;
    padding:5px 0 5px !important;
    display:flex;
   align-items:center;
+  position: relative;
 }
 .teer-profileMenuItem path{
    stroke-width:7px
