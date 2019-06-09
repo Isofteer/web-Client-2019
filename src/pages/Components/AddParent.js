@@ -5,6 +5,27 @@ import  ParentPartners  from './partners/parentPartners'
 import { Icon, InlineIcon } from "@iconify/react";
 import arrowUp  from '@iconify/react/fa-solid/angle-up';
 import arrowDown  from '@iconify/react/fa-solid/angle-down';
+
+
+
+
+const Checkbox = ({ ParentType, id, name,isChecked,onChange })=> 
+<span className="teer-margin">
+    <input 
+      checked={ isChecked}    
+      type="radio"
+      onChange={ onChange } 
+      name={ name} 
+      id={ `ParentType${id}`} />
+
+    <label htmlFor={"ParentType" + id} >Step</label>
+</span>
+
+
+
+
+
+
 class AddParent extends Component{
 
     state ={
@@ -16,23 +37,27 @@ class AddParent extends Component{
         selectedItem:null,
         parents:[],
         iUserID:16,
-        newparents:[]
+        ParentType:1
+      
     }
 
     handleMemberSearch( searchedMembersList ){
         this.setState({foundmembers:searchedMembersList} );
-        console.log(this.state);      
+       
     }
 
-    SelectMemberItem( memberid ){
+    SelectMemberItem( e,  memberid ){   
+       
+        if ( this.state.selectedItem !==memberid ){
+   
 
-        this.setState( {selectedItem:memberid ,["selectedItem_"+memberid]:!this.state["selectedItem_"+memberid]});
-        
-        this.GetMemberPartners( memberid );
-        console.log(this.state.selectedItem)
+            this.setState( {selectedItem:memberid ,["selectedItem_"+memberid]:!this.state["selectedItem_"+memberid]});
+               
+             this.GetMemberPartners( memberid );
+         }
     }
 
-    GetMemberPartners ( memberid ){
+    GetMemberPartners (  memberid ){
 
         axios.post('http://localhost:5000/parent/partners', {memberid})
         .then(response => {
@@ -46,8 +71,9 @@ class AddParent extends Component{
 
                    partners[memberid] = data.rows;
 
-               this.setState({partners},e=>{   console.log( this.state.partners); });               
+                    console.log( partners[memberid] );
                           
+                    this.setState( {partners})
              
         })
         .catch(error => {
@@ -55,16 +81,15 @@ class AddParent extends Component{
         });
     }
 
-  
-    componentDidMount (){
+
+    componentDidMount ( ) {
 
             axios.get('http://localhost:5000/parent',{ params:{memberid:this.state.iUserID}})
             .then(response => {
                 
                 var {status, data}   = response;        
 
-                this.setState({parents:data.rows},e=>{   console.log( this.state.partners); });               
-                            
+                this.setState({parents:data.rows});    
                 
             })
             .catch(function (error) {
@@ -95,36 +120,51 @@ class AddParent extends Component{
             e.nativeEvent.stopImmediatePropagation();
             if (collapse)
             {
-                this.setState({ selectedItem:null },
-                    f=> console.log(this.state))
+                this.setState({ selectedItem:null })
+                
             }
             else
             this.setState({ selectedItem:id })
-        }
+        } 
 
 
-     handleAddnewParents (  arg ){
+     handleAddnewParents ( PartnerArgs ){
+           
+            let { parentType , ipkmemberid } = PartnerArgs;         
 
+            let partner = this.state.partners[ this.state.selectedItem ].find( p =>   p.ipkmemberid === ipkmemberid );
 
-// please continue from here
+            this.setState( {parents:[...this.state.parents,partner ] });
+           
+     }
 
-        const _distinctMembersList =    new Set([...this.state.newparents,arg] );
+     ConfirmSelection=( e )=>{
 
-        this.setState( {newparents:[ _distinctMembersList.values()] },
-            e=>{
-                alert("alert ");
+        e.stopPropagation();
 
-                console.log( this.state.newparents );
-            });
+        e.nativeEvent.stopImmediatePropagation();
+        
+        const selectedMember = this.state.foundmembers.find( p=> p.ipkmemberid===this.state.selectedItem);
 
-
+        console.log( {selectedMember} )     
+ 
+         const parents = [...this.state.parents, {...selectedMember,}];         
 
      }
 
+     handleParentBiologicalTypes( e , ParentType){
+        this.setState({ParentType})
+      }
+  
     render(){
 
+        
+  
 
-        var _member =  this.state.member;
+       const  foundmembers =  this.state.foundmembers.filter( p => !this.state.parents.some( u => u.ipkmemberid === p.ipkmemberid ) );
+
+       let  partners =   this.state.partners[this.state.selectedItem] || [];
+
 
         return <div className="teer-add-parent-wrapper teer-flex-column">            
          
@@ -133,33 +173,66 @@ class AddParent extends Component{
              </div>     
                <ul className ="teer-foundmembersWrapper">
                {
-                 this.state.foundmembers.map(( person,index )=>{
-                       return                     <li key={index} onClick={this.SelectMemberItem.bind(this, person.ipkmemberid)}>
+                 foundmembers.map(( person,index )=>{
+
+                    let id =   person.ipkmemberid;   
+
+                       return  <li key={index} onClick={ e => {this.SelectMemberItem( e, person.ipkmemberid )}}>
 
                                <div className = "teer-details-wrapper">
                                    <div>
                                        <div className="teer-s-dp "><img src={person.profilepicture} alt="profile  here" /></div>
                                    </div>
                                    <div>  {person.firstName} &nbsp;  {person.surname}  &nbsp;  {person.nickname}  </div>
-                                   <div className = "teer-member-action" >    
+                                   <div className = "teer-member-action">    
                                    
                                    {
                                         this.state.selectedItem ===person.ipkmemberid ? 
-                                         <span onClick = { e =>  this.Collapse( { id:person.ipkmemberid ,collapse: true,e }) } className ="teer-profItem">   <Icon color ={"brown"} icon={arrowUp}/> </span> 
+                                         <span onClick = { e =>  this.Collapse( { id:person.ipkmemberid, collapse: true,e }) } className ="teer-profItem">   <Icon color ={"brown"} icon={arrowUp}/> </span> 
                                            :
                                         <span onClick = { e =>  this.Collapse( { id:person.ipkmemberid ,collapse: false,e }) } className ="teer-profItem">  <Icon color ={"brown"} icon={arrowDown}/> </span> 
                                     
                                     }
-                                    </div>
-                                 
+                                    </div>                                 
 
-                               </div>   
+                               </div>     
 
+                            {
+                                this.state.selectedItem===person.ipkmemberid?    <div key={"keynode" + 1} className="fancy">
+                                <h5>Parent Type </h5>
+                                <section>
+                                    <span className="teer-margin">
+                                        <input checked={this.state.ParentType === 1 ? true : false} type="radio" onChange={e => { this.handleParentBiologicalTypes(e, 1) }} name={"ParentType" + person.ipkmemberid} value={1} id={"ParentType1" + id} /><label htmlFor={"ParentType1" + id} >Biological</label>
+                                    </span>
+ 
+                                    <span className="teer-margin">
+                                        <input checked={this.state.ParentType === 2 ? true : false} type="radio" onChange={e => { this.handleParentBiologicalTypes(e, 2) }} name={"ParentType" + person.ipkmemberid} value="2" id={"ParentType2" + id} /><label htmlFor={"ParentType2" + id} >Step</label>
+                                    </span>
+ 
+                                    <span className="teer-margin">
+                                        <input checked={this.state.ParentType === 3 ? true : false} type="radio" onChange={e => { this.handleParentBiologicalTypes(e, 3) }} name={"ParentType" + person.ipkmemberid} value="3" id={"ParentType3" + id} /><label htmlFor={"ParentType3" + id} >Adapting</label>
+                                    </span>
+                                </section>
+                            </div>
+                            :
+                            null
+                            }
                         
-                               <ParentPartners  addNewParent  = { this.handleAddnewParents.bind(this) } selectedItem = { this.state.selectedItem }  person  = { person }  partners = { this.state.partners}/>
-                                                                                             
-                             
-                            
+                          
+
+
+
+                               <ParentPartners  addNewParent  = { this.handleAddnewParents.bind(this) } selectedItem = { this.state.selectedItem }  person  = { person }  partners = { partners }/>
+                         
+                         
+                         {
+                             this.state.selectedItem===person.ipkmemberid?  
+                             <div className="teer-flex-row">
+                               <button onClick = {this.ConfirmSelection} style={{ marginLeft: "auto" }} className="teer-btn teer-btn-primary "> Confirm </button>
+                           </div>   
+                           :null
+                         }
+                              
                            </li>
                        
                     })

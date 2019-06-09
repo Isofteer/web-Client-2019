@@ -681,3 +681,17 @@ flex-flow: row wrap;
    margin-left: auto;
   
 }
+
+
+
+.teer-foundmembersWrapper li{   
+   transition: background-color .5s; 
+   cursor: pointer; 
+}
+.teer-foundmembersWrapper li:hover{
+   background-color: #D7D7D7
+}
+
+.teer-foundmembersWrapper li:hover .teer-profItem{
+   background-color: rgb(247, 242, 242)
+}

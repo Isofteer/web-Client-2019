@@ -5,9 +5,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
-
-import Slide from '@material-ui/core/Slide';
-
+import Slide from '@material-ui/core/Slide'
 import './partneritem.css'
 
 
@@ -20,48 +18,51 @@ class PartnerItem extends Component {
     state = {
         active:true,
         openpop:false,
-        partner:{}
+        partner:{
+            isNew:true
+        },
+        parentType :null
 
     }
  
     OpenPop ( bool ) {
 
         if (typeof(bool) !=="undefined")
-           this.setState( {openpop: bool} );
+               this.setState( {openpop: bool} );
            else
            {
-            this.setState( {openpop: !this.state.openpop} );
+              this.setState( {openpop: !this.state.openpop} );
            }
     }
     handleClose (){
 
     }
 
-    handleParentBiologicalTypes(){
+    handleParentBiologicalTypes( e ){       
 
+       // this.setState( {parentType: e.target.value} , e=> console.log( this.state.parentType))
     }
 
     SecondaryPerson () {
-         this.props.addNewParent( this.state.partner );
+
+         this.props.addNewParent( { partner:this.state.partner} );
     }
 
-    componentWillReceiveProps( props,oldProps){
+    componentWillReceiveProps( props,state){       
 
-        this.setState(  {partner:props.Partner} ); 
+        let _partnerCopy = Object.assign( {},this.state.partner,props.Partner );    
+
+        if (props.Partner.ipkmemberid !== this.state.partner.ipkmemberid) 
+             this.setState( {partner:_partnerCopy});  
+                     
     }
 
-    componentDidUpdate (){
-
-           console.log(this.state);
-    }
+  
     render  (){
-
 
         var partner = this.props.Partner;
 
-        var id  = partner.ipkmemberid+1000;
-
-        var _Pop = <div className = ""> hw;;oq  </div>
+        var id  = partner.ipkmemberid+1000;    
 
         return <div  className = "teer-flex-column teer-partner-item">
                 <span className = {`teer-s-image`}>
@@ -75,48 +76,49 @@ class PartnerItem extends Component {
                         <Icon  color ={"brown"} icon={plus} />
                     </div>
                 </span>
-           <Dialog
-                open={ this.state.openpop}
-                onClose={ this.handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"     
-                TransitionComponent={Transition}           
-                >
-                <DialogTitle>
-                   <div className ="teer-flex-row teer-flex-v-center">
-                   <span className={`menu-icon teer-s-image`}>
-                        <img src={partner.profilepicture} alt="" />
-                    </span> 
-                      <span> {partner.firstName} &nbsp; {partner.surname} </span>
-                   </div>
-                </DialogTitle>
-                  <DialogContent>
-                 
-                  <div key={"keynode" + 1} className="fancy">
-                <h5>Parent Type </h5>
-                <section>
-                    <span className="teer-margin">
-                        <input type="radio" onClick={e => { this.handleParentBiologicalTypes(e, 1) }} name={"ParentType" + partner.ipkmemberid } value="1" id={"ParentType1" + id} /><label htmlFor={"ParentType1" + id} >Biological</label>
-                    </span>
+                    <Dialog
+                            open={ this.state.openpop}
+                            onClose={ this.handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"     
+                            TransitionComponent={Transition}           
+                            >
+                            <DialogTitle>
+                            <div className ="teer-flex-row teer-flex-v-center">
+                            <span className={`menu-icon teer-s-image`}>
+                                    <img src={partner.profilepicture} alt="" />
+                                </span> 
+                                <span> {partner.firstName} &nbsp; {partner.surname} </span>
+                            </div>
+                            </DialogTitle>
+                            <DialogContent>
+                            
+                            <div key={"keynode" + 1} className="fancy">
+                            <h5>Parent Type </h5>
+                            <section>
+                                <span className="teer-margin">
+                                    <input type="radio" onClick={e => { this.handleParentBiologicalTypes(e, 1) }} name={"ParentType" + partner.ipkmemberid + 1 } value="1" id={"ParentType11" + id} /><label htmlFor={"ParentType11" + id} >Biological</label>
+                                </span>
 
-                    <span className="teer-margin">
-                        <input type="radio" onClick={e => { this.handleParentBiologicalTypes(e, 2) }} name={"ParentType"  + partner.ipkmemberid } value="2" id={"ParentType2" + id} /><label htmlFor={"ParentType2" + id} >Step</label>
-                    </span>
+                                <span className="teer-margin">
+                                    <input type="radio" onClick={e => { this.handleParentBiologicalTypes(e, 2) }} name={"ParentType"  + partner.ipkmemberid  +1} value="2" id={"ParentType21" + id} /><label htmlFor={"ParentType21" + id} >Step</label>
+                                </span>
 
-                    <span className="teer-margin">
-                        <input type="radio" onClick={e => { this.handleParentBiologicalTypes(e, 3) }} name={"ParentType" + partner.ipkmemberid } value="3" id={"ParentType3" + id} /><label htmlFor={"ParentType3" + id} >Adapting</label>
-                    </span>
-                </section>
-            </div>
-                       
-                  </DialogContent>
-                   
-                  <DialogActions>
-                         <button  onClick = { e=> this.OpenPop(false) }  className ="teer-btn teer-btn-secondary"> Cancel </button>
-                        <button  onClick = { e=> {this.OpenPop(false); this.SecondaryPerson( ) } } className ="teer-btn teer-btn-primary"> Confirm </button>
-                  </DialogActions>
-            </Dialog>
-               
+                                <span className="teer-margin">
+                                    <input type="radio" onClick={e => { this.handleParentBiologicalTypes(e, 3) }} name={"ParentType" + partner.ipkmemberid  +1} value="3" id={"ParentType31" + id} /><label htmlFor={"ParentType31" + id} >Adapting</label>
+                                </span>
+                            </section>
+                        </div>
+                                
+                            </DialogContent>
+                            
+                            <DialogActions>
+                             
+                                    <button  onClick = { e=> this.OpenPop(false) }  className ="teer-btn teer-btn-secondary"> Cancel </button>
+                                    <button  onClick = { e=> {this.OpenPop(false); this.SecondaryPerson( ) } } className ="teer-btn teer-btn-primary"> Confirm </button>
+                            </DialogActions>
+                        </Dialog>
+                        
 </div>
     }
 }
